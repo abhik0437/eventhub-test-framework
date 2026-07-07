@@ -34,8 +34,8 @@
     "paths": {
       "@pages/*": ["tests/pages/*"],
       "@fixtures/*": ["tests/fixtures/*"],
-      "@utils/*": ["tests/utils/*"],
-      "@data/*": ["tests/test-data/*"]
+      "@utils/*": ["tests/config/utils/*"],
+      "@data/*": ["tests/config/test-data/*"]
     },
 
     // Recommended Options
@@ -46,5 +46,5 @@
     "outDir": "dist"
   },
 
-  "include": ["tests", "playwright.config.ts"]
+  "include": ["tests", "playwright.config.ts", "tests/fixtures", "tests/pages"]
 }

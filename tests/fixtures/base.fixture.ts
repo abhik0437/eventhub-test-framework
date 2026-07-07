@@ -1,21 +1,40 @@
 import { test as base, Page } from "@playwright/test";
-import { LoginPage } from "@pages/LoginPage";
+import { POManager } from "tests/pages/POManager";
+import { LoginPage } from "tests/pages/LoginPage";
+import { HomePage } from "tests/pages/HomePage";
+import {config} from "../config/config";
 
-type LoginFixture = {
-    loggedInPage: Page
+
+type MyFixtures = {
+    loginPage: LoginPage,
+    loggedInPage: Page,
+    homePage: HomePage
 };
 
-export const test = base.extend<LoginFixture>({
+export const test = base.extend<MyFixtures>({
 
-    loggedInPage: async ({ page }, use) => {
-        const loginPage = new LoginPage(page);
+    loginPage: async ({ page }, use) => {
 
-        //login with credentials
-        await loginPage.goTo();
+        const pomanager = new POManager(page);
 
-        await loginPage.login(process.env.GMAIL_USERNAME!, process.env.GMAIL_PASSWORD!);
+        await use(pomanager.loginPage);
+    },
 
-        await use(page);
+    loggedInPage: async({loginPage}, use)=>{
+
+        await loginPage.login(config.email, config.password);
+        await use(loginPage.page);
+
+
+    },
+
+    homePage: async({loggedInPage}, use)=>{
+
+        const pomanager = new POManager(loggedInPage);
+
+        await use(pomanager.homePage);
+
     }
+
 });
 

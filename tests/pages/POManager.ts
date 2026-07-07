@@ -1,19 +1,27 @@
 import { LoginPage } from "./LoginPage";
+import { HomePage } from "./HomePage";
 import { Page } from "@playwright/test";
 
 export class POManager{
 
-    private page: Page;
+    private _page: Page;
 
-    private _loginPage?: LoginPage
+    private _loginPage?: LoginPage;
+
+    private _homePage?: HomePage;
 
     constructor(page: Page){
-        this.page=page;
+        this._page=page;
     }
 
     
     get loginPage(){
-        return this._loginPage??= new LoginPage(this.page);
+        return this._loginPage??= new LoginPage(this._page);
         
     }
+
+    get homePage(){
+        return this._homePage??= new HomePage(this._page);
+    }
+
 }
