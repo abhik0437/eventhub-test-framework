@@ -41,7 +41,7 @@ jobs:
 
       - name: Run Regression Tests (Push)
         if: github.event_name != 'pull_request'
-        run: npm run test:regression -- --project=${{ matrix.browser }}
+        run: npm run test:sanity -- --project=${{ matrix.browser }}
 
       - name: Generate Allure Report
         if: always()
