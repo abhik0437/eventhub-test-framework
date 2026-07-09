@@ -172,7 +172,7 @@ test.describe("Home Page - Eventhub", () => {
 
             await bookNowBtn.click();
 
-            await expect(homePage.page).toHaveURL(new URLPattern({ pathname: "/events/*" }));
+            await expect(homePage.page).toHaveURL(/\/events\/\d+$/);
 
         })
     });
