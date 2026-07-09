@@ -4,7 +4,7 @@ import { config } from "../../config/config";
 
 import { POManager } from "tests/pages/POManager";
 
-test("successful login into application", async ({loginPage})=>{
+test("@smoke successful login into application", async ({loginPage})=>{
 
     //initiate login
 
