@@ -18,7 +18,7 @@ test("@smoke successful login into application", async ({loginPage})=>{
 
 }),
 
-test("failed login attempt", async({loginPage})=>{
+test("@regression failed login attempt", async({loginPage})=>{
 
     //try login with incorrect credentials
 

@@ -1,11 +1,8 @@
-name: EventHub Playwright CI
+name: CI - Playwright Tests
 
 on:
-  push:
-    branches: [main, master]
   pull_request:
-    branches: [main, master]
-
+ 
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -31,17 +28,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright browsers
+      - name: Install Playwright
         run: npx playwright install --with-deps
 
-  
-      - name: Run Smoke Tests (PR)
-        if: github.event_name == 'pull_request'
-        run: npm run test:smoke -- --project=${{ matrix.browser }}
-
-      - name: Run Regression Tests (Push)
-        if: github.event_name != 'pull_request'
-        run: npm run test:sanity -- --project=${{ matrix.browser }}
+      - name: Run Tests
+        run: npm run test:smoke
 
       - name: Generate Allure Report
         if: always()

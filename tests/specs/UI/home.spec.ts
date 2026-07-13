@@ -59,7 +59,7 @@ test.describe("Home Page - Eventhub", () => {
     );
 
 
-    test.describe("@ui @sanity @homepage @navigation Navbar UI & functionality valdations", () => {
+    test.describe("@ui @regression @homepage @navigation Navbar UI & functionality valdations", () => {
 
 
         test("Clicking on Home should open/reload Home page", async ({ homePage }) => {
@@ -121,7 +121,7 @@ test.describe("Home Page - Eventhub", () => {
 
     });
 
-    test.describe("@ui @sanity @homepage @cta Hero section validations", () => {
+    test.describe("@ui @regression @homepage @cta Hero section validations", () => {
 
 
         test("Browse Events button must be present and lead to events page", async ({ homePage }) => {
@@ -147,7 +147,7 @@ test.describe("Home Page - Eventhub", () => {
         })
     });
 
-    test.describe("@ui @sanity @homepage @featuredEvents section validation", () => {
+    test.describe("@ui @regression @homepage @featuredEvents section validation", () => {
 
 
         test("The section should display event cards with necessary UI elements", async ({ homePage }) => {
@@ -177,7 +177,7 @@ test.describe("Home Page - Eventhub", () => {
         })
     });
 
-    test.describe("@ui @sanity @homepage @footer section validations", () => {
+    test.describe("@ui @regression @homepage @footer section validations", () => {
 
 
         test("The section should display a heading", async ({ homePage }) => {
@@ -207,7 +207,7 @@ test.describe("Home Page - Eventhub", () => {
     });
 
 
-    test.describe("@sanity @APImocking validations", () => {
+    test.describe("@regression @APImocking validations", () => {
 
         test("New mocked event should be displayed in UI appropriately", async ({ homePage }) => {
 
