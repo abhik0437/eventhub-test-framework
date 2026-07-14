@@ -36,6 +36,22 @@ jobs:
       - name: Run Tests (Single Browser)
         run: npx playwright test --project=chromium --grep "@regression"
 
+      # 🆕 STEP 1: Download previous Pages artifact (contains old report)
+      - name: Download previous report
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: old-report
+        continue-on-error: true
+
+      # 🆕 STEP 2: Copy history into new results
+      - name: Copy Allure history
+        run: |
+          if [ -d old-report/history ]; then
+            mkdir -p allure-results/history
+            cp -r old-report/history/* allure-results/history/
+          fi
+
       - name: Generate Allure Report
         run: npm run report:allure
 
