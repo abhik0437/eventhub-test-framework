@@ -1,13 +1,25 @@
 import { expect } from "@playwright/test";
 import { test } from "../../fixtures/base.fixture";
 import { config } from "tests/config/config";
-import { homedir } from "node:os";
 
 
 test.describe("Home Page - Eventhub", () => {
 
 
     test.describe("@smoke @homepage @ui basic page test", () => {
+
+        // test.only("debug - verify auth token from storageState", async ({ homePage }) => {
+        //     await homePage.page.goto("/");
+
+        //     const authToken = await homePage.page.evaluate(() => window.localStorage.getItem("eventhub_token"));
+        //     console.log("authToken:", authToken);
+        //     console.log("cookies:", await homePage.page.context().cookies());
+
+        //     await expect(authToken).not.toBeNull();
+        //     await expect(homePage.navbar.locator("span[data-testid='user-email-display']")).toContainText(config.email);
+        // });
+
+
 
         test("homepage displays all the sections appropriately", async ({ homePage }) => {
 
@@ -213,24 +225,24 @@ test.describe("Home Page - Eventhub", () => {
 
 
             let sampleEvent = {
-                        "title": "Sample Event 1",
-                        "description": "A sample event",
-                        "category": "Festival",
-                        "venue": "Novotel",
-                        "city": "Hyderabad",
-                        "eventDate": "2026-07-07T09:00:00.000Z",
-                        "price": 5000,
-                        "totalSeats": 500,
-                        "imageUrl": "https://example.com/banner.jpg",
-                        "availableSeats": 500,
-                        "isStatic":true,
-                        "userId": null,
-                        "createdAt": "2026-07-07T12:30:37.659Z",
-                        "updatedAt": "2026-07-07T12:30:37.659Z"
+                "title": "Sample Event 1",
+                "description": "A sample event",
+                "category": "Festival",
+                "venue": "Novotel",
+                "city": "Hyderabad",
+                "eventDate": "2026-07-07T09:00:00.000Z",
+                "price": 5000,
+                "totalSeats": 500,
+                "imageUrl": "https://example.com/banner.jpg",
+                "availableSeats": 500,
+                "isStatic": true,
+                "userId": null,
+                "createdAt": "2026-07-07T12:30:37.659Z",
+                "updatedAt": "2026-07-07T12:30:37.659Z"
 
-                    };
+            };
 
-            
+
 
             await homePage.page.route("**/api/events*", async route => {
 
@@ -239,12 +251,13 @@ test.describe("Home Page - Eventhub", () => {
                 const existingEvents = await existingEventsResponse.json();
 
                 const newBody = {
-                    
+
                     success: true,
                     data: [
-                    ...existingEvents.data,
-                    sampleEvent
-                ]};
+                        ...existingEvents.data,
+                        sampleEvent
+                    ]
+                };
 
                 await route.fulfill({
                     body: JSON.stringify(newBody)
@@ -253,37 +266,37 @@ test.describe("Home Page - Eventhub", () => {
             });
 
 
-              //validating the event creation in UI
+            //validating the event creation in UI
 
-              const createdEventCard = homePage.featuredEvents.last();
+            const createdEventCard = homePage.featuredEvents.last();
 
-              // validate that the event card has Festival tag
+            // validate that the event card has Festival tag
 
-              await expect(createdEventCard.locator("div:first-child>div:nth-child(2)>span")).toHaveText(sampleEvent.category);
+            await expect(createdEventCard.locator("div:first-child>div:nth-child(2)>span")).toHaveText(sampleEvent.category);
 
-              //validate title is displayed accordingly
+            //validate title is displayed accordingly
 
-              await expect(createdEventCard.locator(">div:last-child>a:nth-of-type(1)")).toHaveText(sampleEvent.title);
+            await expect(createdEventCard.locator(">div:last-child>a:nth-of-type(1)")).toHaveText(sampleEvent.title);
 
-              //validate date and location are displayed accordingly
+            //validate date and location are displayed accordingly
 
-              await expect(createdEventCard.locator("div:last-child>div:nth-of-type(1)>div:first-child>span")).toHaveText("Tue, 7 Jul");
+            await expect(createdEventCard.locator("div:last-child>div:nth-of-type(1)>div:first-child>span")).toHaveText("Tue, 7 Jul");
 
-              await expect(createdEventCard.locator("div:last-child>div:nth-of-type(1)>div:last-child>span")).toHaveText(`${sampleEvent.venue}, ${sampleEvent.city}`);
+            await expect(createdEventCard.locator("div:last-child>div:nth-of-type(1)>div:last-child>span")).toHaveText(`${sampleEvent.venue}, ${sampleEvent.city}`);
 
-              //validate price and seat count is displayed accordingly
+            //validate price and seat count is displayed accordingly
 
-              await expect(createdEventCard.locator("div:last-child>div:nth-of-type(2)>div:first-child>p")).toContainText(`\$${sampleEvent.price}`.substring(0,2));
+            await expect(createdEventCard.locator("div:last-child>div:nth-of-type(2)>div:first-child>p")).toContainText(`\$${sampleEvent.price}`.substring(0, 2));
 
-              await expect(createdEventCard.locator("div:last-child>div:nth-of-type(2)>div:first-child>span")).toContainText(`${sampleEvent.availableSeats}`);
-
-
+            await expect(createdEventCard.locator("div:last-child>div:nth-of-type(2)>div:first-child>span")).toContainText(`${sampleEvent.availableSeats}`);
 
 
-
-            })
 
 
 
         })
+
+
+
     })
+})

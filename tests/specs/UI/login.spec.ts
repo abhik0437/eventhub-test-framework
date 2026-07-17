@@ -1,12 +1,20 @@
-import {expect} from "@playwright/test";
-import {test} from "../../fixtures/base.fixture";
+import {test, expect} from "@playwright/test";
 import { config } from "../../config/config";
 
 import { POManager } from "tests/pages/POManager";
 
-test("@smoke successful login into application", async ({loginPage})=>{
+test.describe("@login validations", ()=>{
+
+    test.use({storageState: undefined});
+
+
+test("@smoke successful login into application", async ({page})=>{
 
     //initiate login
+
+    const poManager  = new POManager(page);
+
+    const loginPage  = poManager.loginPage;
 
     await loginPage.login(config.email, config.password);
 
@@ -18,7 +26,11 @@ test("@smoke successful login into application", async ({loginPage})=>{
 
 }),
 
-test("@regression failed login attempt", async({loginPage})=>{
+test("@regression failed login attempt", async({page})=>{
+
+    const poManager  = new POManager(page);
+
+    const loginPage  = poManager.loginPage;
 
     //try login with incorrect credentials
 
@@ -30,4 +42,8 @@ test("@regression failed login attempt", async({loginPage})=>{
 
 
 })
+
+
+})
+
 

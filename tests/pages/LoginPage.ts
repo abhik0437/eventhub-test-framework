@@ -1,4 +1,5 @@
 import {Page, Locator} from "@playwright/test";
+import {config} from "../config/config";
 
 
 export class LoginPage {
@@ -18,7 +19,7 @@ export class LoginPage {
     }
 
     private async goTo(){
-        await this._page.goto("/login");
+        await this._page.goto(config.baseUrl+"/login");
     }
 
     async login(username: string, password: string){

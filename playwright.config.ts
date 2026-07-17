@@ -33,7 +33,11 @@ export default defineConfig({
     timeout: 5000
   },
 
+  globalSetup: require.resolve("./global-setup"),
+
   use: {
+
+    storageState: "loginConfig.json",
    
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
