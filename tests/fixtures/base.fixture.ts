@@ -3,11 +3,13 @@ import { POManager } from "tests/pages/POManager";
 import { LoginPage } from "tests/pages/LoginPage";
 import { HomePage } from "tests/pages/HomePage";
 import {config} from "../config/config";
+import EventsPage from "@pages/EventsPage";
 
 
 type MyFixtures = {
     
-    homePage: HomePage
+    homePage: HomePage,
+    eventsPage: EventsPage
 };
 
 export const test = base.extend<MyFixtures>({
@@ -21,6 +23,14 @@ export const test = base.extend<MyFixtures>({
 
         await use(pomanager.homePage);
 
+    },
+
+    eventsPage: async({page}, use)=>{
+        await page.goto("/events");
+
+        const pomanager = new POManager(page);
+
+        await use(pomanager.eventsPage);
     }
 
 });

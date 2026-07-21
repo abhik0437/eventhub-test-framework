@@ -8,17 +8,6 @@ test.describe("Home Page - Eventhub", () => {
 
     test.describe("@smoke @homepage @ui basic page test", () => {
 
-        // test.only("debug - verify auth token from storageState", async ({ homePage }) => {
-        //     await homePage.page.goto("/");
-
-        //     const authToken = await homePage.page.evaluate(() => window.localStorage.getItem("eventhub_token"));
-        //     console.log("authToken:", authToken);
-        //     console.log("cookies:", await homePage.page.context().cookies());
-
-        //     await expect(authToken).not.toBeNull();
-        //     await expect(homePage.navbar.locator("span[data-testid='user-email-display']")).toContainText(config.email);
-        // });
-
 
 
         test("homepage displays all the sections appropriately", async ({ homePage }) => {

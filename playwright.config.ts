@@ -45,6 +45,11 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     headless: true,
     baseURL: process.env.BASE_URL || config.baseUrl
+
+    // trace: 'on',
+    // screenshot: 'on',
+    // headless: false,
+    // baseURL: process.env.BASE_URL || config.baseUrl
   },
 
   /* Configure projects for major browsers */
