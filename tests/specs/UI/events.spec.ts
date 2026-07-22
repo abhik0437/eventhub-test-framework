@@ -1,5 +1,6 @@
 import {test} from "../../fixtures/base.fixture";
 import {expect} from "@playwright/test";
+import { config } from "tests/config/config";
 
 test.describe("Events page Validations Suite", ()=>{
 
@@ -94,6 +95,34 @@ test.describe("@regression tests", ()=>{
 
 
 
+});
+
+test.describe("@regression @APImocking tests", ()=>{
+
+
+   test("No events found should be displayed when no active events present",async({homePage})=>{
+
+      await homePage.page.route(`${config.apiUrl}/events*`, async route=>{
+
+         const mockResponse = JSON.stringify({
+            success: true,
+            data: []
+         });
+
+         await route.fulfill({
+            body: mockResponse
+         })
+      });
+
+      await homePage.navbar.locator("a:has-text('Events')").click();
+
+      await expect(homePage.page.locator("h3:has-text('No events found')")).toBeVisible();
+
+
+
+
+
+   })
 })
 
 })
