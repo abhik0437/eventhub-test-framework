@@ -4,12 +4,14 @@ import { LoginPage } from "tests/pages/LoginPage";
 import { HomePage } from "tests/pages/HomePage";
 import {config} from "../config/config";
 import EventsPage from "@pages/EventsPage";
+import BookingsPage from "@pages/BookingsPage";
 
 
 type MyFixtures = {
     
     homePage: HomePage,
-    eventsPage: EventsPage
+    eventsPage: EventsPage,
+    bookingsPage: BookingsPage
 };
 
 export const test = base.extend<MyFixtures>({
@@ -31,6 +33,16 @@ export const test = base.extend<MyFixtures>({
         const pomanager = new POManager(page);
 
         await use(pomanager.eventsPage);
+    },
+
+    bookingsPage: async({page}, use)=>{
+
+        await page.goto("/bookings");
+
+        const pomanager= new POManager(page);
+
+        await use(pomanager.bookingsPage);
+
     }
 
 });

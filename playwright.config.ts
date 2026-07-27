@@ -41,15 +41,15 @@ export default defineConfig({
    
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
-    headless: true,
-    baseURL: process.env.BASE_URL || config.baseUrl
-
-    // trace: 'on',
-    // screenshot: 'on',
-    // headless: false,
+    // trace: 'on-first-retry',
+    // screenshot: 'only-on-failure',
+    // headless: true,
     // baseURL: process.env.BASE_URL || config.baseUrl
+
+    trace: 'on',
+    screenshot: 'on',
+    headless: false,
+    baseURL: process.env.BASE_URL || config.baseUrl
   },
 
   /* Configure projects for major browsers */
