@@ -17,9 +17,9 @@ test.describe("@bookingsPage @UI @regression tests", ()=>{
 
         await expect(bookingsPage.clearBookingsButton).toBeVisible();
 
-        await bookingsPage.clearBookingsButton.click();
-
         bookingsPage.page.on('dialog', dialog=>dialog.accept());
+
+        await bookingsPage.clearBookingsButton.click();
 
         await expect(bookingsPage.page.getByRole("heading", {level:3, name: "No bookings yet"})).toBeVisible();
 
