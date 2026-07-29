@@ -5,13 +5,15 @@ import { HomePage } from "tests/pages/HomePage";
 import {config} from "../config/config";
 import EventsPage from "@pages/EventsPage";
 import BookingsPage from "@pages/BookingsPage";
+import ManageEventsPage from "@pages/ManageEvents";
 
 
 type MyFixtures = {
     
     homePage: HomePage,
     eventsPage: EventsPage,
-    bookingsPage: BookingsPage
+    bookingsPage: BookingsPage,
+    manageEventsPage: ManageEventsPage
 };
 
 export const test = base.extend<MyFixtures>({
@@ -42,6 +44,16 @@ export const test = base.extend<MyFixtures>({
         const pomanager= new POManager(page);
 
         await use(pomanager.bookingsPage);
+
+    },
+
+    manageEventsPage: async({page},use)=>{
+
+        await page.goto("/admin/events");
+
+        const poManager = new POManager(page);
+
+        use(poManager.manageEventsPage);
 
     }
 

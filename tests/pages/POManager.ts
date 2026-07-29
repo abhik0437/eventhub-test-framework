@@ -3,6 +3,7 @@ import { HomePage } from "./HomePage";
 import { Page } from "@playwright/test";
 import EventsPage from "./EventsPage";
 import BookingsPage from "./BookingsPage";
+import ManageEventsPage from "./ManageEvents";
 
 export class POManager{
 
@@ -15,6 +16,8 @@ export class POManager{
     private _eventsPage?: EventsPage;
 
     private _bookingsPage?: BookingsPage;
+
+    private _manageEventsPage?:ManageEventsPage;
 
     constructor(page: Page){
         this._page=page;
@@ -37,5 +40,11 @@ export class POManager{
     get bookingsPage(){
         return this._bookingsPage??= new BookingsPage(this._page);
     }
+
+    get manageEventsPage(){
+        return this._manageEventsPage??=new ManageEventsPage(this._page);
+    }
+
+
 
 }
