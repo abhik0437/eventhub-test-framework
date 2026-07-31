@@ -5,7 +5,8 @@ import { HomePage } from "tests/pages/HomePage";
 import {config} from "../config/config";
 import EventsPage from "@pages/EventsPage";
 import BookingsPage from "@pages/BookingsPage";
-import ManageEventsPage from "@pages/ManageEvents";
+import ManageEventsPage from "@pages/ManageEventsPage";
+import ManageBookingsPage from "@pages/ManageBookingsPage";
 
 
 type MyFixtures = {
@@ -13,7 +14,8 @@ type MyFixtures = {
     homePage: HomePage,
     eventsPage: EventsPage,
     bookingsPage: BookingsPage,
-    manageEventsPage: ManageEventsPage
+    manageEventsPage: ManageEventsPage,
+    manageBookingsPage:ManageBookingsPage
 };
 
 export const test = base.extend<MyFixtures>({
@@ -55,6 +57,15 @@ export const test = base.extend<MyFixtures>({
 
         use(poManager.manageEventsPage);
 
+    },
+
+    manageBookingsPage: async({page}, use)=>{
+
+        await page.goto("/admin/bookings");
+
+        const pomanager = new POManager(page);
+
+        use(pomanager.manageBookingsPage);
     }
 
 });
