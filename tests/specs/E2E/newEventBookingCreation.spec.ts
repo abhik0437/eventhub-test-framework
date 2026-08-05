@@ -3,7 +3,7 @@ import { config } from "tests/config/config";
 
 test.describe("New event booking journey", () => {
 
-    test.only("Verify new booking is made successfully and show up under My bookings", async ({ page }) => {
+    test("Verify new booking is made successfully and show up under My bookings", async ({ page }) => {
 
         await test.step("login to the application", async () => {
 
